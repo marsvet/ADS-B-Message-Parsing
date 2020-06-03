@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ads</title>
+  </head>
+  <body>
+    {% extends "template.html" %}
+    {% block content %}
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="column is-center is-four-fifths">
+        {% if flightInfo is not none %}
+        <table class="table">
+          <thead>
+            <tr>
+              {% for item in flightInfo.keys() %}
+                  <th>{{ item }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for item in flightInfo.values() %}
+                  <td>{{ item }}</td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+        {% endif %}
+
+        {% if contract03 is not none %}
+        <table class="table">
+          <thead>
+            <tr>
+              {% for item in contract03.keys() %}
+                  <th>{{ item }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for item in contract03.values() %}
+                  <td>{{ item }}</td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+        {% endif %}
+
+        {% if contract07 is not none %}
+        <table class="table">
+          <thead>
+            <tr>
+              {% for item in contract07.keys() %}
+                  <th>{{ item }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for item in contract07.values() %}
+                  <td>{{ item }}</td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+        {% endif %}
+
+        {% if contract0D is not none %}
+        <table class="table">
+          <thead>
+            <tr>
+              {% for item in contract0D.keys() %}
+                  <th>{{ item }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for item in contract0D.values() %}
+                  <td>{{ item }}</td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+        {% endif %}
+
+        {% if contract0E is not none %}
+        <table class="table">
+          <thead>
+            <tr>
+              {% for item in contract0E.keys() %}
+                  <th>{{ item }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for item in contract0E.values() %}
+                  <td>{{ item }}</td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+        {% endif %}
+
+        {% if contract10 is not none %}
+        <table class="table">
+          <thead>
+            <tr>
+              {% for item in contract10.keys() %}
+                  <th>{{ item }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for item in contract10.values() %}
+                  <td>{{ item }}</td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+        {% endif %}
+
+        {% if contract14 is not none %}
+        <table class="table">
+          <thead>
+            <tr>
+              {% for item in contract14.keys() %}
+                  <th>{{ item }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for item in contract14.values() %}
+                  <td>{{ item }}</td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+        {% endif %}
+
+        {% if errMsg is not none %}
+        <div class="notification is-warning">
+            {{ errMsg }}
+        </div>
+        {% endif %}
+
+        <form method="post" action="/">
+          <input class="input" type="hidden" id="filename" name='filename' value="">
+          <div class="field is-horizontal">
+            <div class="field-body">
+              <div class="field">
+                <div class="file is-info is-medium">
+                    <label class="file-label">
+                    <input id="fileupload" class="file-input" type="file" name="file" data-url="/upload" multiple>
+                    <span class="file-cta">
+                        <span class="file-label">
+                            选择TXT文件
+                        </span>
+                    </span>
+                    </label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="control">
+                  <button type="submit" class="button is-info is-medium">Start</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jqueryui/1.10.4/jquery.ui.widget.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.28.0/js/jquery.fileupload.min.js"></script>
+<script>
+$(function () {
+    $('#fileupload').fileupload({
+       dataType: 'json',
+       sequentialUploads: true,
+       maxChunkSize: 500000,
+       success: function (result, textStatus, jqXHR) {
+           console.log(result);
+           var obj = eval(result);
+           console.log(obj);
+           console.log(obj.filename);
+           $("#filename").val(obj.filename);
+       },
+       progressall: function (e, data) {
+           var progress = parseInt(data.loaded / data.total * 100, 10);
+           $('#progress .progress-bar').css(
+              'width',
+              progress + '%'
+            );
+      },
+      done: function (e, data) {
+          //var result = '<div class="alert alert-success" role="alert">upload success</div>';
+          //$("#result").empty().append(result);
+      },
+      error: function (e, data) {
+          //var result = '<div class="alert alert-danger" role="alert">upload failed</div>';
+          //$("#result").empty().append(result);
+      },
+    });
+});
+</script>
+
+    {% endblock %}
+  </body>
+</html>
